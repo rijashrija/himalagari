@@ -84,7 +84,10 @@ if (!empty($bestSellerPkg) && !empty($bestSellerPkg->slug)) {
       <div class="best-seller-card">
         <span class="bs-badge">Best Seller</span>
 
-        <h2 class="bs-title">' . $bestTitle . '</h2>
+        <a href="' . BASE_URL . 'package/' . $bestSellerPkg->slug . '">
+          <h2 class="bs-title">' . $bestTitle . '</h2>
+        </a>
+
         <p class="bs-subtitle">' . $subtitle . '</p>
 
         <div class="bs-info">
@@ -103,7 +106,7 @@ $jVars['module:home-best-seller'] = $home_best_seller;
 
 /* Package Display Using Home Flag */
 $reshome = $grade = $destination_name = $rating = '';
-$homeRec = Package::get_databy_display('popular', 1, 24);
+$homeRec = Package::get_databy_display('popular', 1, 100);
 
 if (!empty($homeRec)) {
     $reshome .= '
@@ -116,7 +119,7 @@ if (!empty($homeRec)) {
       </header>
       <br />
       <div class="package-grid-wrapper">
-        <div class="packages-grid mx-auto" id="packageGrid">';
+        <div class="packages-grid mx-auto">';
     
     $homeCount = 0;
     foreach ($homeRec as $RecRow) {
@@ -139,12 +142,16 @@ if (!empty($homeRec)) {
         $reshome .= '
         <div class="package-card"'. $hideHomeStyle .'>
           <div class="image-wrapper">
-            <img src="' . $img . '" alt="' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '" />
+            <a href="' . BASE_URL . 'package/' . $RecRow->slug . '">
+              <img src="' . $img . '" alt="' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '" />
+            </a>
             ' . $popularBadge . '
           </div>
 
           <div class="card-content">
-            <h3 class="title">' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            <a href="' . BASE_URL . 'package/' . $RecRow->slug . '">
+              <h3 class="title">' . htmlspecialchars($RecRow->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            </a>
 
             <div class="card-info-wrapper">
 
@@ -206,7 +213,7 @@ $jVars['module:package-home'] = $reshome;
 
 /* Top-Rated Family Packages — shown on homepage */
 $res_toprated = '';
-$topRatedRec = Package::get_top_rated_packages(1, 24);
+$topRatedRec = Package::get_top_rated_packages(1, 100);
 
 if (!empty($topRatedRec)) {
     $res_toprated .= '
@@ -251,11 +258,15 @@ if (!empty($topRatedRec)) {
         $res_toprated .= '
         <div class="package-card"'. $hideStyle .'>
           <div class="image-wrapper">
-            <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
+            <a href="' . BASE_URL . 'package/' . $pkg->slug . '">
+              <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
+            </a>
             ' . $popularBadge . '
           </div>
           <div class="card-content">
-            <h3 class="title">' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            <a href="' . BASE_URL . 'package/' . $pkg->slug . '">
+              <h3 class="title">' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            </a>
             <div class="card-info-wrapper">
 
               <div class="info-row">
@@ -311,7 +322,7 @@ if (!empty($topRatedRec)) {
     </section>';
 } else {
     // Fallback: show section with popular packages if no rated ones exist
-    $fallbackRec = Package::get_databy_display('popular', 1, 24);
+    $fallbackRec = Package::get_databy_display('popular', 1, 100);
     if (!empty($fallbackRec)) {
         $res_toprated .= '
     <section class="packages-wrapper components">
@@ -340,11 +351,15 @@ if (!empty($topRatedRec)) {
             $res_toprated .= '
         <div class="package-card"'. $hideStyle .'>
           <div class="image-wrapper">
-            <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
+            <a href="' . BASE_URL . 'package/' . $pkg->slug . '">
+              <img src="' . $img . '" alt="' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '" />
+            </a>
             <span class="badge">POPULAR</span>
           </div>
           <div class="card-content">
-            <h3 class="title">' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            <a href="' . BASE_URL . 'package/' . $pkg->slug . '">
+              <h3 class="title">' . htmlspecialchars($pkg->title, ENT_QUOTES, 'UTF-8') . '</h3>
+            </a>
             <div class="card-info-wrapper">
 
               <div class="info-row">
@@ -1350,7 +1365,7 @@ if (defined('PACKAGE_PAGE')) {
           </h2>
           <br>
           <div class="package-grid-wrapper">
-            <ul class="package-grid owl-carousel owl-theme" id="packageGrid">
+            <ul class="package-grid owl-carousel owl-theme" id="similarPackageCarousel">
         ';
 
         $similarTours = Package::get_filterpkg_by('', $pkgRec->activityId);
@@ -1504,7 +1519,7 @@ if (defined('PACKAGE_PAGE')) {
                 
                 // Similar Packages Carousel
                 if (typeof $ !== "undefined" && typeof $.fn.owlCarousel !== "undefined") {
-                     $("#packageGrid").owlCarousel({
+                     $("#similarPackageCarousel").owlCarousel({
                         loop: true,
                         margin: 20,
                         items: 3,

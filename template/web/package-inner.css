@@ -89,18 +89,10 @@ span a{
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* important */
-  overflow: hidden; /* body itself doesn't scroll */
   scroll-behavior: smooth;
 
 }
 
-.scroll-wrapper {
-  height: 100vh; /* full viewport */
-  overflow-y: scroll; /* scroll content inside wrapper */
-  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-  overscroll-behavior: contain; /* prevents rubberband */
-}
   /* in_navbar-remove-bootstrap-burger-icon-focus-afterclick */
 .navbar .navbar-toggler,
 .navbar .navbar-toggler:focus,
@@ -323,130 +315,7 @@ html, body {
 }
 
 
-#offcanvas_inquiry {
-  overflow-y: auto;
-  max-height: 100vh;
-  width: min(100%, 738px) !important;
-}
-.inquiry_text{
-  margin-block:auto ;
-  margin-inline: 8%;
-}
-.inquiry_title{
-      font-weight: 600;
-    font-size: 38px;
-}
-.inquiry_title form{
-  margin-top: 30px;
-}
 
-.form-row {
-  display: flex;
-  gap: 12px;
-}
-.form-group span,select span{
-color: red;
-}
-select.form-control,
-input.form-control {
-  height: calc(1.5em + 0.75rem + 2px);
-      font-size: 11px;
-}
-/* Base style for all select options */
-select.form-control option {
-  font-size: 12px;   /* default size */
-}
-
-/* Larger screens */
-@media (min-width: 768px) {
-  select.form-control option {
-    font-size: 14px;
-  }
-}
-
-/* Very small screens (mobile) */
-@media (max-width: 480px) {
-  select.form-control option {
-    font-size: 11px;
-  }
-}
-
-form input,
-form select,
- form textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 6px;
-  border: 1px solid #dbe7ff;
-  margin-bottom: 14px;
-  font-size: 14px;
-}
-
-form textarea {
-  height: 120px;
-  resize: none;
-}
-
-form button {
-  background: #1C6408;
-  color: white;
-  border: none;
-  padding: 12px 0;
-  width: 100%;             
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-label.error {
-  color: red;
-  font-size: 13px;
-  margin-top: -10px;
-  margin-bottom: 15px;
-  display: block;
-}
-
-form button:hover {
-  background: #6c8b4a;
-}
-.inquiry_title span{
-  color: #1C6408;
-}
-.form-group {
-  flex: 1;
-}
-
-.form-group label {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 4px;
-  font-weight: 500;
-}
-
-.form-group label span {
-  color: red;
-}
-
-.country-code {
-  max-width: 90px;
-}
-
-.phone-box {
-  flex: 1.5;
-}
-
-form button {
-  padding: 10px 0;
-  width: 100%;
-}
-label {
-  color: #000; /* normal label color */
-}
-
-.required {
-  color: red; /* only star is red */
-}
 
 .navbar .dropdown {
   position: relative;
@@ -703,7 +572,9 @@ font-size: clamp(13px, 3.2vw, 16px);
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: 40px;
+  overflow: visible !important;
 }
+
 
 .container > * {
   min-width: 0;
@@ -1077,8 +948,13 @@ font-size: clamp(13px, 3.2vw, 16px);
 /* RIGHT CARD */
 .price-card {
   position: sticky;
-  top: 100px; 
+  top: 110px; /* Increased to prevent clipping under navbar */
+  z-index: 100;
+  align-self: start;
 }
+
+
+
 .price-container{
   background: #fff;
   padding: clamp(16px, 4vw, 30px);
@@ -1298,10 +1174,12 @@ font-size: clamp(13px, 3.2vw, 16px);
   }
 
   .price-card {
-    position: static; /* removes sticky */
-    top: auto;
+    position: sticky !important;
+    top: 85px !important;
     width: 100%;
+    z-index: 1000;
   }
+
 
   .price-container {
     margin-inline: auto;
@@ -2288,16 +2166,76 @@ html, body {
 
     .package-right {
         margin-top: 50px !important;
+        overflow: visible !important;
     }
+
 
     .price-card.sticky,
     .price-card {
-        position: relative !important;
-        top: 0 !important;
+        position: fixed !important; /* Changed to fixed for mobile reliability */
+        top: 85px !important;
+        left: 0;
+        right: 0;
         width: 100% !important;
         max-width: 100% !important;
         margin-top: 0 !important;
+        z-index: 2000;
+        background: #fff;
+        padding: 12px 16px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        border-radius: 0 !important;
+        display: none; /* Initially hidden, shown via JS or when scrolling */
     }
+
+    /* Show the sticky bar on mobile when it has the .active class */
+    .price-card.mobile-active {
+        display: block !important;
+    }
+
+
+
+    .price-card .price-container {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        gap: 10px;
+    }
+
+    /* Hide unnecessary elements in the sticky mobile bar */
+    .price-card .tagline,
+    .price-card .price del,
+    .price-card .price small,
+    .price-card ul,
+    .price-card h5,
+    .price-card .bonus {
+        display: none !important;
+    }
+
+    .price-card .price {
+        margin: 0 !important;
+        white-space: nowrap;
+    }
+
+    .price-card .price span {
+        font-size: 20px !important;
+    }
+
+    .price-card button {
+        flex: 1;
+        min-width: 110px !important;
+        height: 38px !important;
+        font-size: 13px !important;
+        margin: 0 !important;
+        padding: 0 5px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
 
     .price-container {
         width: 100% !important;

@@ -26,6 +26,7 @@ if ($galleryRec) {
                 <li>
                   <div class="docs_wrapper">
                     <img src="' . $imgSrc . '" class="popup-img" alt="' . $row->title . '">
+                    <div class="caption_overlay">' . $row->title . '</div>
                     <span class="search-icon">
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </span>

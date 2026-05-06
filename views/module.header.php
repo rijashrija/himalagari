@@ -154,7 +154,7 @@ $header_components .= '
 
             <div class="col-md-3 search">
               <label class="form-label d-none d-md-block">&nbsp;</label>
-              <button type="submit" class="btn-premium w-100" id="inquiry-btn"><p>Search</p></button>
+              <button type="submit" class="explore_btn inquiry-btn w-100" id="inquiry-btn"><p>Search</p></button>
             </div>
           </form>
         </div>
@@ -245,7 +245,7 @@ $header_components .= '
                   </div>
 
                   <div class="form-row justify-content-center">
-                    <button type="submit" class="btn-premium"><p>Submit Inquiry</p></button>
+                    <button type="submit" class="explore_btn inquiry-btn"><p>Submit Inquiry</p></button>
                   </div>
                 </form>
             </div>

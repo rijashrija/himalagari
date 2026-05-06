@@ -17,47 +17,14 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* important */
-  overflow: hidden; /* body itself doesn't scroll */
-}
-
-.scroll-wrapper {
-  height: 100vh; /* full viewport */
-  overflow-y: auto; /* scroll content inside wrapper */
-  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-  overscroll-behavior: contain; /* prevents rubberband */
-  
-}
-/* Allow children to shrink */
-.contact-wrapper > *,
-.form-row > *,
-.phone-field > * {
-  min-width: 0;
-}
-.contact-section,
-.contact-wrapper,
-.contact-info,
-.contact-form {
-  width: 100%;
-  max-width: 100%;
 }
 
 @media (max-width: 768px) {
-  html, body {
-    height: auto;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .scroll-wrapper {
-    height: auto;
-    min-height: auto;
-    overflow: visible;
-  }
     body {
     overscroll-behavior-x: none;
   }
 }
+
 
   /* in_navbar-remove-bootstrap-burger-icon-focus-afterclick */
 .navbar .navbar-toggler,
@@ -359,131 +326,9 @@ width: 95%;
 }
 
 
-#offcanvas_inquiry{
-   overflow-y: auto;   
-  max-height: 100vh;
-  width: 738px;
-}
-.inquiry_text{
-  margin-block:auto ;
-  margin-inline: 8%;
-}
-.inquiry_title{
-      font-weight: 600;
-    font-size: 38px;
-}
-.inquiry_title form{
-  margin-top: 30px;
-}
 
-.form-row {
-  display: flex;
-  gap: 12px;
-}
-.form-group span,select span{
-color: red;
-}
-select.form-control,
-input.form-control {
-  height: calc(1.5em + 0.75rem + 2px);
-}
 
-form input,
-form select,
- form textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 6px;
-  border: 1px solid #dbe7ff;
-  margin-bottom: 14px;
-  font-size: 14px;
-}
 
-#offcanvas_inquiry {
-  overflow-y: auto;
-  max-height: 100vh;
-  width: min(100%, 738px) !important;
-}
-
-.inquiry_text {
-  margin-block: auto;
-  margin-inline: 8%;
-}
-
-.inquiry_title {
-  font-weight: 600;
-  font-size: 38px;
-}
-
-.inquiry_title form {
-  margin-top: 30px;
-}
-
-form textarea {
-  height: 120px;
-  resize: none;
-}
-
-form button {
-  background: #1C6408;
-  color: white;
-  border: none;
-  padding: 12px 0;
-  width: 100%;             
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-label.error {
-  color: red !important;
-  font-size: 13px;
-  margin-top: -10px;
-  margin-bottom: 15px;
-  display: block;
-}
-/* 
-form button:hover {
-  background: #6c8b4a;
-} */
-.inquiry_title span{
-  color: #1C6408;
-}
-.form-group {
-  flex: 1;
-}
-
-.form-group label {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 4px;
-  font-weight: 500;
-}
-
-.form-group label span {
-  color: red;
-}
-
-.country-code {
-  max-width: 90px;
-}
-
-.phone-box {
-  flex: 1.5;
-}
-
-form button {
-  padding: 10px 0;
-  width: 100%;
-}
-label {
-  color: #000; /* normal label color */
-}
-
-.required {
-  color: red; /* only star is red */
-}
 
 .navbar .dropdown {
   position: relative;

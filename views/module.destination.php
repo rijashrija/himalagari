@@ -307,7 +307,7 @@ if ($packageRows) {
             <section class="hero" ' .$hero_bg. ' >
                 <div class="overlay"></div>
 
-                <div class="hero-content">
+                <div class="activity_hero">
                     <h1 class="hero-title-trapezium">' . $heroTitle . '</h1>
                     ' . (isset($content[0]) ? $content[0] : '') . '
 

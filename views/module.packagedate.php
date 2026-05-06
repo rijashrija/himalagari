@@ -17,7 +17,7 @@ if (defined('HOME_PAGE')) {
 
     if ($fixedRec) {
         $resfixed .= '
-        <section class="packages-wrapper components text-center">
+        <section class="packages-wrapper components text-center" id="section3">
             <header class="page-header text-center">
                 <h4 class="text-center">Fixed Departure</h4>
                 <h2 class="mb-3 green-title text-center">
@@ -27,7 +27,7 @@ if (defined('HOME_PAGE')) {
             </header>
             <br />
 
-            <div class="packages-grid mx-auto">';
+            <div class="packages-grid package--lower mx-auto">';
 
         $fdCount = 0;
         foreach ($fixedRec as $row) {
@@ -47,14 +47,18 @@ if (defined('HOME_PAGE')) {
             $hideStyle = ($fdCount > 6) ? ' style="display:none;"' : '';
 
             $resfixed .= '
-            <div class="package-card"'. $hideStyle .'>
+            <div class="package-card">
                 <div class="image-wrapper">
-                    <img src="' . $img . '" alt="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '" />
+                    <a href="' . BASE_URL . 'package/' . $row->pkg_slug . '">
+                        <img src="' . $img . '" alt="' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '" />
+                    </a>
                     ' . $popularBadge . '
                 </div>
 
                 <div class="card-content">
-                    <h3 class="title">' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '</h3>
+                    <a href="' . BASE_URL . 'package/' . $row->pkg_slug . '">
+                        <h3 class="title">' . htmlspecialchars($row->pkg_title, ENT_QUOTES, 'UTF-8') . '</h3>
+                    </a>
 
                     <div class="card-info-wrapper">
 
@@ -110,11 +114,8 @@ if (defined('HOME_PAGE')) {
         
         if (count($fixedRec) > 6) {
             $resfixed .= '
-            <div class="load-more-wrap text-center mt-4">
-                <button type="button" class="explore_btn mx-auto inquiry-btn js-load-more-packages" data-initial="6" data-step="24">
-                    <p>Load More Packages</p>
-                </button>
-            </div>';
+  <div class="more-btn load-more-wrap centred"><a href="javascript:void(0)" id="toggle-btn" class="explore_btn inquiry-btn"><p>Load More</p></a></div>
+            ';
         }
 
         $resfixed .= '
